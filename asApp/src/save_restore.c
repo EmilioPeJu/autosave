@@ -1832,12 +1832,19 @@ STATIC int write_it(char *filename, struct chlist *plist)
 
 	errno = 0;
 #if defined(vxWorks)
-	n = ioctl(fileno(out_fd),FIOSYNC,0);	/* NFS flush to disk */
-	if (n == ERROR) {
-		printf("save_restore:write_it: ioctl(,FIOSYNC,) returned %d [%s]\n",
-			n, datetime);
-		if (errno) myPrintErrno("write_it", __FILE__, __LINE__);
-	}
+	/****** SJS - following line and associated parentheses ******
+	 ****** added 27/01/05                                  ******
+	 ****** Do not make this call if we're not using NFS    ******/
+	if (save_restoreNFSHostName[0] && save_restoreNFSHostAddr[0])
+	{
+          n = ioctl(fileno(out_fd),FIOSYNC,0);	/* NFS flush to disk */
+          if (n == ERROR) {
+            printf("save_restore:write_it: ioctl(,FIOSYNC,) returned %d [%s]\n",
+                   n, datetime);
+            if (errno) myPrintErrno("write_it", __FILE__, __LINE__);
+          }
+        }
+	/****** End of SJS modified code ******/
 #elif defined(_WIN32)
         /* WIN32 has no real equivalent to fsync? */
 #else
