@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<components arch="linux-x86">
+	<autosave.dlssrstatus device="device"/>
+	<autosave.dlssrfile device="device" file="file"/>
+	<autosave.save_restoreStatus P="P"/>
+</components>
