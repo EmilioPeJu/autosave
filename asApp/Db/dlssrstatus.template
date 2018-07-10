@@ -1,0 +1,88 @@
+# This associates an edm screen with the template
+# % gui, $(name=), edm, save_restoreStatus_more.edl, P=$(device)
+
+# This associates BOY screens with the template
+# % gui, $(name), boydetail, asApp_opi/autosave_detail.opi, desc=$(device), device=$(device), name=$(name)
+# % gui, $(name), boyembed, asApp_opi/autosave_embed.opi, desc=$(device), device=$(device), name=$(name)
+# % gui, $(name), boyembed, asApp_opi/autosave_embed_box.opi, desc=$(device), device=$(device), name=$(name)
+
+# These define what PVs a detail screen should contain
+# % gui, $(name), readback, General Status, $(device):SRSTATUSST
+# % gui, $(name), readback, Recently, $(device):SRRECENTST
+# % gui, $(name), readback, Reboot Status, $(device):RRSTATUSST
+# % gui, $(name), readback, Reboot time, $(device):RRTIME
+# % gui, $(name), readback, File 0 Status, $(device):0:STATUSST
+# % gui, $(name), readback, File 0 Name, $(device):0:NAME
+# % gui, $(name), readback, File 0 Written, $(device):0:TIME
+# % gui, $(name), readback, File 1 Status, $(device):1:STATUSST
+# % gui, $(name), readback, File 1 Name, $(device):1:NAME
+# % gui, $(name), readback, File 1 Written, $(device):1:TIME
+# % gui, $(name), readback, File 2 Status, $(device):2:STATUSST
+# % gui, $(name), readback, File 2 Name, $(device):2:NAME
+# % gui, $(name), readback, File 2 Written, $(device):2:TIME
+
+
+# This makes the component icon reflect the status and severity
+# % gui, $(name=), sevr
+#% archiver 10 Monitor VAL
+#% $(alh=None) $SEVRCOMMAND UP_ANY dls-alh-handler.py $(device):RRSTATUS
+record(mbbo,"$(device):RRSTATUS") {
+	field(DTYP,"Soft Channel")
+	field(NOBT,"3")
+	field(ONVL,"1")
+	field(TWVL,"2")
+	field(THVL,"3")
+	field(FRVL,"4")
+	field(ZRST,"No Status")
+	field(ONST,"Failure")
+	field(TWST,"Warning")
+	field(THST,"Seq Fail")
+	field(FRST,"Ok")
+	field(ONSV, "MAJOR")
+	field(TWSV, "MINOR")
+	field(THSV, "MINOR")
+}
+
+record(stringout,"$(device):RRSTATUSST") {
+	field(DTYP,"Soft Channel")
+	field(VAL,"Status unknown")
+}
+
+record(stringout,"$(device):RRTIME") {
+	field(DTYP,"Soft Channel")
+	field(VAL,"Not yet saved")
+}
+
+# % gui, $(name=), sevr
+#% archiver 10 Monitor VAL
+#% $(alh=None) $SEVRCOMMAND UP_ANY dls-alh-handler.py $(device):SRSTATUS
+record(mbbo,"$(device):SRSTATUS") {
+	field(DTYP,"Soft Channel")
+	field(NOBT,"3")
+	field(ONVL,"1")
+	field(TWVL,"2")
+	field(THVL,"3")
+	field(FRST,"4")
+	field(ZRST,"No Status")
+	field(ONST,"Failure")
+	field(TWST,"Warning")
+	field(THST,"Seq Fail")
+	field(FRST,"Ok")
+	field(ONSV, "MAJOR")
+	field(TWSV, "MINOR")
+	field(THSV, "MINOR")
+}
+
+record(bo,"$(device):SRHEARTBT") {
+	field(DTYP,"Soft Channel")
+}
+
+record(stringout,"$(device):SRSTATUSST") {
+	field(DTYP,"Soft Channel")
+	field(VAL,"Status unknown")
+}
+
+record(stringout,"$(device):SRRECENTST") {
+	field(DTYP,"Soft Channel")
+	field(VAL,"Status unknown")
+}

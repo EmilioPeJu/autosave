@@ -861,24 +861,24 @@ STATIC int save_restore(void)
 	/* Build names for save_restore general status PV's with status_prefix */
 	if (save_restoreUseStatusPVs && *status_prefix && (*SR_status_PV == '\0')) {
 		strNcpy(SR_status_PV, status_prefix, PV_NAME_LEN);
-		strncat(SR_status_PV, "SR_status", PV_NAME_LEN-1-strlen(SR_status_PV));
+		strncat(SR_status_PV, ":SRSTATUS", PV_NAME_LEN-1-strlen(SR_status_PV));
 		strNcpy(SR_heartbeat_PV, status_prefix, PV_NAME_LEN);
-		strncat(SR_heartbeat_PV, "SR_heartbeat", PV_NAME_LEN-1-strlen(SR_heartbeat_PV));
+		strncat(SR_heartbeat_PV, ":SRHEARTBT", PV_NAME_LEN-1-strlen(SR_heartbeat_PV));
 		strNcpy(SR_statusStr_PV, status_prefix, PV_NAME_LEN);
-		strncat(SR_statusStr_PV, "SR_statusStr", PV_NAME_LEN-1-strlen(SR_statusStr_PV));
+		strncat(SR_statusStr_PV, ":SRSTATUSST", PV_NAME_LEN-1-strlen(SR_statusStr_PV));
 		strNcpy(SR_recentlyStr_PV, status_prefix, PV_NAME_LEN);
-		strncat(SR_recentlyStr_PV, "SR_recentlyStr", PV_NAME_LEN-1-strlen(SR_recentlyStr_PV));
+		strncat(SR_recentlyStr_PV, ":SRRECENTST", PV_NAME_LEN-1-strlen(SR_recentlyStr_PV));
 		TATTLE(ca_search(SR_status_PV, &SR_status_chid), "save_restore: ca_search(%s) returned %s", SR_status_PV);
 		TATTLE(ca_search(SR_heartbeat_PV, &SR_heartbeat_chid), "save_restore: ca_search(%s) returned %s", SR_heartbeat_PV);
 		TATTLE(ca_search(SR_statusStr_PV, &SR_statusStr_chid), "save_restore: ca_search(%s) returned %s", SR_statusStr_PV);
 		TATTLE(ca_search(SR_recentlyStr_PV, &SR_recentlyStr_chid), "save_restore: ca_search(%s) returned %s", SR_recentlyStr_PV);
 
 		strNcpy(SR_rebootStatus_PV, status_prefix, PV_NAME_LEN);
-		strncat(SR_rebootStatus_PV, "SR_rebootStatus", PV_NAME_LEN-1-strlen(SR_rebootStatus_PV));
+		strncat(SR_rebootStatus_PV, ":RRSTATUS", PV_NAME_LEN-1-strlen(SR_rebootStatus_PV));
 		strNcpy(SR_rebootStatusStr_PV, status_prefix, PV_NAME_LEN);
-		strncat(SR_rebootStatusStr_PV, "SR_rebootStatusStr", PV_NAME_LEN-1-strlen(SR_rebootStatusStr_PV));
+		strncat(SR_rebootStatusStr_PV, ":RRSTATUSST", PV_NAME_LEN-1-strlen(SR_rebootStatusStr_PV));
 		strNcpy(SR_rebootTime_PV, status_prefix, PV_NAME_LEN);
-		strncat(SR_rebootTime_PV, "SR_rebootTime", PV_NAME_LEN-1-strlen(SR_rebootTime_PV));
+		strncat(SR_rebootTime_PV, ":RRTIME", PV_NAME_LEN-1-strlen(SR_rebootTime_PV));
 		TATTLE(ca_search(SR_rebootStatus_PV, &SR_rebootStatus_chid), "save_restore: ca_search(%s) returned %s", SR_rebootStatus_PV);
 		TATTLE(ca_search(SR_rebootStatusStr_PV, &SR_rebootStatusStr_chid), "save_restore: ca_search(%s) returned %s", SR_rebootStatusStr_PV);
 		TATTLE(ca_search(SR_rebootTime_PV, &SR_rebootTime_chid), "save_restore: ca_search(%s) returned %s", SR_rebootTime_PV);
@@ -1105,17 +1105,17 @@ STATIC int save_restore(void)
 				if (*status_prefix && (plist->status_PV[0] == '\0') && (plist->statusPvIndex < NUM_STATUS_PV_SETS)) {
 					/*** Build PV names ***/
 					/* make common portion of PVname strings */
-					n = (PV_NAME_LEN-1) - epicsSnprintf(plist->status_PV, PV_NAME_LEN-1, "%sSR_%1d_", status_prefix, plist->statusPvIndex);
+					n = (PV_NAME_LEN-1) - epicsSnprintf(plist->status_PV, PV_NAME_LEN-1, "%s:%1d", status_prefix, plist->statusPvIndex);
 					strNcpy(plist->name_PV, plist->status_PV, PV_NAME_LEN);
 					strNcpy(plist->save_state_PV, plist->status_PV, PV_NAME_LEN);
 					strNcpy(plist->statusStr_PV, plist->status_PV, PV_NAME_LEN);
 					strNcpy(plist->time_PV, plist->status_PV, PV_NAME_LEN);
 					/* make all PVname strings */
-					strncat(plist->status_PV, "Status", n);
-					strncat(plist->name_PV, "Name", n);
-					strncat(plist->save_state_PV, "State", n);
-					strncat(plist->statusStr_PV, "StatusStr", n);
-					strncat(plist->time_PV, "Time", n);
+					strncat(plist->status_PV, ":STATUS", n);
+					strncat(plist->name_PV, ":NAME", n);
+					strncat(plist->save_state_PV, ":STATE", n);
+					strncat(plist->statusStr_PV, ":STATUSST", n);
+					strncat(plist->time_PV, ":TIME", n);
 					/* connect with PV's */
 					TATTLE(ca_search(plist->status_PV, &plist->status_chid), "save_restore: ca_search(%s) returned %s", plist->status_PV);
 					TATTLE(ca_search(plist->name_PV, &plist->name_chid), "save_restore: ca_search(%s) returned %s", plist->name_PV);

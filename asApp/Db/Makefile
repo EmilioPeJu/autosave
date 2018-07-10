@@ -13,6 +13,8 @@ include $(TOP)/configure/CONFIG
 #DB += xxx.db
 DB += save_restoreStatus.db
 DB += configMenu.db
+DB += dlssrfile.template
+DB += dlssrstatus.template
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add
 # <anyname>_template = <templatename>

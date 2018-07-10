@@ -1,0 +1,34 @@
+record(stringout,"$(device):$(file):NAME") {
+	field(VAL,"Not In Use")
+	field(DTYP,"Soft Channel")
+}
+record(longout,"$(device):$(file):STATE") {
+	field(DTYP,"Soft Channel")
+}
+
+#% archiver 10 Monitor VAL
+#% $(alh=None) $SEVRCOMMAND UP_ANY dls-alh-handler.py $(device):$(file):STATUS
+record(mbbo,"$(device):$(file):STATUS") {
+	field(DTYP,"Soft Channel")
+	field(NOBT,"3")
+	field(ONVL,"1")
+	field(TWVL,"2")
+	field(THVL,"3")
+	field(FRVL,"4")
+	field(ZRST,"No Status")
+	field(ONST,"Failure")
+	field(TWST,"Warning")
+	field(THST,"Seq Fail")
+	field(FRST,"Ok")
+	field(ONSV, "MAJOR")
+	field(TWSV, "MINOR")
+	field(THSV, "MINOR")
+}
+record(stringout,"$(device):$(file):STATUSST") {
+	field(DTYP,"Soft Channel")
+	field(VAL,"Status unknown")
+}
+record(stringout,"$(device):$(file):TIME") {
+	field(DTYP,"Soft Channel")
+	field(VAL,"Not yet saved")
+}
