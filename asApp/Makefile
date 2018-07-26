@@ -1,5 +1,7 @@
 TOP = ..
 include $(TOP)/configure/CONFIG
-DIRS += src Db
+DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard *src*))
+DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard *Db*))
+DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard *op*))
 include $(TOP)/configure/RULES_DIRS
 
