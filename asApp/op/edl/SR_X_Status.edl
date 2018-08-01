@@ -69,7 +69,7 @@ x 120
 y 32
 w 270
 h 12
-controlPv "$(P)SR_statusStr"
+controlPv "$(P):SRSTATUSST"
 font "helvetica-medium-r-8.0"
 smartRefresh
 fastUpdate
@@ -93,7 +93,7 @@ x 10
 y 25
 w 100
 h 20
-controlPv "$(P)SR_status"
+controlPv "$(P):SRSTATUS"
 font "helvetica-medium-r-8.0"
 smartRefresh
 fastUpdate
@@ -165,7 +165,7 @@ x 60
 y 45
 w 270
 h 12
-controlPv "$(P)SR_recentlyStr"
+controlPv "$(P):SRRECENTST"
 font "helvetica-medium-r-8.0"
 smartRefresh
 fastUpdate
@@ -257,7 +257,7 @@ yPoints  {
 18 20
 19 20
 }
-visPv "CALC\\\{(A)\}($(P)SR_heartbeat)"
+visPv "CALC\\\{(A)\}($(P):SRHEARTBT)"
 visInvert
 visMin 0
 visMax 1
@@ -273,7 +273,7 @@ x 120
 y 94
 w 270
 h 12
-controlPv "$(P)SR_$(N)_StatusStr"
+controlPv "$(P):$(N):STATUSST"
 font "helvetica-medium-r-8.0"
 smartRefresh
 fastUpdate
@@ -297,7 +297,7 @@ x 10
 y 88
 w 100
 h 20
-controlPv "$(P)SR_$(N)_Status"
+controlPv "$(P):$(N):STATUS"
 font "helvetica-medium-r-8.0"
 smartRefresh
 fastUpdate
@@ -321,7 +321,7 @@ x 170
 y 71
 w 150
 h 14
-controlPv "$(P)SR_$(N)_Time"
+controlPv "$(P):$(N):TIME"
 font "helvetica-medium-r-8.0"
 smartRefresh
 fastUpdate
@@ -345,7 +345,7 @@ x 340
 y 73
 w 43
 h 10
-controlPv "$(P)SR_$(N)_State"
+controlPv "$(P):$(N):STATE"
 lineColor index 14
 onColor index 14
 offColor index 3
@@ -364,7 +364,7 @@ x 10
 y 68
 w 150
 h 20
-controlPv "$(P)SR_$(N)_Name"
+controlPv "$(P):$(N):NAME"
 font "helvetica-medium-r-8.0"
 smartRefresh
 fastUpdate
